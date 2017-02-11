@@ -34,5 +34,9 @@ https://docs.particle.io/reference/firmware/photon/#tcpclient
 http://mattenoble.com/2013/08/07/wemo-hacking/
 
 
+## Alarm Clock Notes
+http://www.makeuseof.com/tag/arduino-night-light-and-sunrise-alarm-project/
+
+
 
 
