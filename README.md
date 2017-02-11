@@ -29,6 +29,19 @@ to the lights.  This code uses SOAP and TCP on the local network controling
 the wemo devices directly.  The lights change state instantly when the
 button is pressed.
 
+## Shake to Turn On
+
+IF you accidentally turn off the lights, it's nice to be able to turn them
+on again.  I thought about making a long press or double click detection,
+or maybe use the directional buttons in some way.  Then I realized the
+internet button has an acceleratometer too.  Using that device, you can
+measure if the button is tilted accurately.  You can also tell if it's been
+shaken.
+
+The code looks at the measurements in each loop and if the difference is
+too high, it sends the turn on codes to the wemo lights.
+
+
 # Materials
   * internet button
   * wemo switches
