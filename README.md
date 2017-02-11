@@ -66,6 +66,7 @@ The button photon is updated with the particle cli or web ide using the code in 
 
 # Future
 TODO: 
+
   * Scan for devices
   * Alarm or blinky lights
   * Fix D7 light
