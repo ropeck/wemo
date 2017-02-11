@@ -1,35 +1,44 @@
 # wemo
 
-A Particle project named wemo
+Control wemo switches with a photon internet button
 
-## Welcome to your project!
+## IOT Deskside Switch
 
-Every new Particle project is composed of 3 important elements that you'll see have been created in your project directory for wemo.
+Just for fun, I've set up some wemo switches and lights around the house
+recently.  They come with a free app that lets you set a schedule and
+controll them with your phone.  
 
-#### ```/src``` folder:  
-This is the source folder that contains the firmware files for your project. It should *not* be renamed. 
-Anything that is in this folder when you compile your project will be sent to our compile service and compiled into a firmware binary for the Particle device that you have targeted.
+Using IFTTT, you can make the lights change state from an outside event
+or send a trigger to make something happen when a switch is pressed.
 
-If your application contains multiple files, they should all be included in the `src` folder. If your firmware depends on Particle libraries, those dependencies are specified in the `project.properties` file referenced below.
+## Nighttime
 
-#### ```.ino``` file:
-This file is the firmware that will run as the primary application on your Particle device. It contains a `setup()` and `loop()` function, and can be written in Wiring or C/C++. For more information about using the Particle firmware API to create firmware for your Particle device, refer to the [Firmware Reference](https://docs.particle.io/reference/firmware/) section of the Particle documentation.
+The new lights are set to turn on a half hour before sunset, so it's hard
+to even notice they are there.  It works great but for bed time, running the
+app from the phone is just a little frustrating at the end of a long day.
+(Such difficult problems!)
 
-#### ```project.properties``` file:  
-This is the file that specifies the name and version number of the libraries that your project depends on. Dependencies are added automatically to your `project.properties` file when you add a library to a project using the `particle library add` command in the CLI or add a library in the Desktop IDE.
+To help switch off the living room and bedroom lights simply, and to play
+with IOT and the wemo lights, I wrote this project.  It uses an internet
+button flashed with this code to make a big pushbutton that sends wemo
+codes to turn off the lights.
 
-## Adding additional files to your project
+You can do the same thing using IFTTT and a published message from the
+button, but it takes a few seconds for the signal to be detected and relayed
+to the lights.  This code uses SOAP and TCP on the local network controling
+the wemo devices directly.  The lights change state instantly when the
+button is pressed.
 
-#### Projects with multiple sources
-If you would like add additional files to your application, they should be added to the `/src` folder. All files in the `/src` folder will be sent to the Particle Cloud to produce a compiled binary.
+# Materials
+  * internet button
+  * wemo switches
 
-#### Projects with external libraries
-If your project includes a library that has not been registered in the Particle libraries system, you should create a new folder named `/lib/<libraryname>/src` under `/<project dir>` and add the `.h` and `.cpp` files for your library there. All contents of the `/lib` folder and subfolders will also be sent to the Cloud for compilation.
+# Installation
+The button photon is updated with the particle cli or web ide using the code in the src directory.
 
-## Compiling your project
+```
 
-When you're ready to compile your project, make sure you have the correct Particle device target selected and run `particle compile <platform>` in the CLI or click the Compile button in the Desktop IDE. The following files in your project folder will be sent to the compile service:
+% particle flash buttonname
 
-- Everything in the `/src` folder, including your `.ino` application file
-- The `project.properties` file for your project
-- Any libraries stored under `lib/<libraryname>/src`
+```
+
