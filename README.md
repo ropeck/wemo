@@ -29,6 +29,14 @@ to the lights.  This code uses SOAP and TCP on the local network controling
 the wemo devices directly.  The lights change state instantly when the
 button is pressed.
 
+## Bright Lights
+  The button is nice on the nightstand, but it has bright LEDs that are
+distracting when trying to sleep in a dark room. 
+
+Fortunately the code to dim the led is simple enough.
+How to dim D7 but not sense it as a button is TBD.
+
+  
 ## Shake to Turn On
 
 IF you accidentally turn off the lights, it's nice to be able to turn them
@@ -55,3 +63,9 @@ The button photon is updated with the particle cli or web ide using the code in 
 
 ```
 
+
+# Future
+TODO: 
+  * Scan for devices
+  * Alarm or blinky lights
+  * Fix D7 light
