@@ -1,12 +1,20 @@
+#include "InternetButton.h"
 
 #define ON "1"
 #define OFF "0"
 
+InternetButton b = InternetButton();
 TCPClient client;
 char wemoIP[ ] = "10.0.1.10";
+// living room 10.0.1.10
+// bedroom 10.0.1.18
+
 int wemoPort = 49153;
 
 void setup() {
+    b.begin();
+    RGB.control(true);
+    RGB.brightness(32);  
     Serial.begin(9600);
 }
 
@@ -44,9 +52,11 @@ void switchOff() {
 }
 
 void loop() {
-  switchOn();
-  delay(1000);
-  switchOff();
-  delay(1000);
+    if(!b.allButtonsOff()){
+      switchOff();
+      b.rainbow(10);
+      delay(100);
+      b.allLedsOff();
+    }
 }
 
