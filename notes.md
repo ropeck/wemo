@@ -37,6 +37,36 @@ http://mattenoble.com/2013/08/07/wemo-hacking/
 ## Alarm Clock Notes
 http://www.makeuseof.com/tag/arduino-night-light-and-sunrise-alarm-project/
 
+```c++
 
+void sunrisealarm(){
+   //each second during the 30 minite period should increase the colour value by:
+  float increment = (float) 255/(30*60);
+
+  //red 255 , green 255 gives us full brightness yellow  
+  if(currentMinutes >= minutesUntilSunrise){
+     //sunrise begins! 
+     float currentVal = (float)((currentMillis/1000) - (minutesUntilSunrise*60)) * increment;
+     Serial.print("Current value for sunrise:");
+     Serial.println(currentVal);
+     //during ramp up, write the current value of minutes X brightness increment
+     if(currentVal < 255){
+       analogWrite(RED,currentVal);
+       analogWrite(GREEN,currentVal);
+     }
+     else if(currentMinutes - minutesUntilSunrise < 40){
+       // once we're at full brightness, keep the lights on for 10 minutes longer
+       analogWrite(RED,255);
+       analogWrite(GREEN,255);
+     }
+     else{
+        //after that, we're nuking them back to off state
+        analogWrite(RED,0);
+        analogWrite(GREEN,0);
+      }
+  }
+}
+
+```
 
 
