@@ -70,3 +70,17 @@ TODO:
   * Scan for devices
   * Alarm or blinky lights
   * Fix D7 light
+  * setup mode
+    * select which devices by pressing the buttons and choosing
+    * maybe have a web server for setup mode to choose devices
+  * refactor the code for a wemo and button library
+  * long press, double click
+  * turn on LR only -- long click? 
+  
+## Sunrise Alarm
+  Slowly turn on the leds in the morning to wake up.  Then turn off when pressed.
+  
+## Clock Display
+  Show the time of day on the leds on the button.
+  
+
