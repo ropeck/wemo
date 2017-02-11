@@ -18,7 +18,7 @@ void setup() {
     Serial.begin(9600);
 }
 
-void switchSet(String state) {
+void switchSet(String state, String host) {
   TCPClient client;
   String data1;
   data1 += "<?xml version=\"1.0\" encoding=\"utf-8\"?><s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"><s:Body><u:SetBinaryState xmlns:u=\"urn:Belkin:service:basicevent:1\"><BinaryState>";
@@ -26,7 +26,9 @@ void switchSet(String state) {
   data1 += "%d</BinaryState></u:SetBinaryState></s:Body></s:Envelope>";
 
   Serial.println("switchState");
-  if (client.connect(wemoIP,wemoPort)) {
+  Serial.println(host);
+
+  if (client.connect(host,wemoPort)) {
         client.println("POST /upnp/control/basicevent1 HTTP/1.1");
         client.println("Content-Type: text/xml; charset=utf-8");
         client.println("SOAPACTION: \"urn:Belkin:service:basicevent:1#SetBinaryState\"");
@@ -44,11 +46,15 @@ void switchSet(String state) {
 }
 
 void switchOn() {
-  switchSet(ON);
+  switchSet(ON, "");
 }
 
+String swaddr[] = {"10.0.1.10", "10.0.1.18"};
+
 void switchOff() {
-  switchSet(OFF);
+  for (int i=0; i< 2; i++) {
+    switchSet(OFF, swaddr[i]);
+  }
 }
 
 void loop() {
