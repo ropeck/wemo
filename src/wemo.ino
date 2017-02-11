@@ -5,17 +5,24 @@
 
 InternetButton b = InternetButton();
 TCPClient client;
-char wemoIP[ ] = "10.0.1.10";
+String swaddr[] = {"10.0.1.10", "10.0.1.18"};
 // living room 10.0.1.10
 // bedroom 10.0.1.18
 
 int wemoPort = 49153;
+
+int xValue;
+int yValue;
+int zValue;
 
 void setup() {
     b.begin();
     RGB.control(true);
     RGB.brightness(32);  
     Serial.begin(9600);
+  xValue = b.readX();
+  yValue = b.readY();
+  zValue = b.readZ();
 }
 
 void switchSet(String state, String host) {
@@ -46,10 +53,11 @@ void switchSet(String state, String host) {
 }
 
 void switchOn() {
-  switchSet(ON, "");
+  for (int i=0; i< 2; i++) {
+    switchSet(ON, swaddr[i]);
+  }
 }
 
-String swaddr[] = {"10.0.1.10", "10.0.1.18"};
 
 void switchOff() {
   for (int i=0; i< 2; i++) {
@@ -63,6 +71,27 @@ void loop() {
       b.rainbow(10);
       delay(100);
       b.allLedsOff();
+      return;
     }
+    int shake = (abs((xValue-b.readX())+abs(yValue-b.readY())+
+		 abs(zValue-b.readZ())));
+//     Serial.println("shake");
+//     Serial.println(shake);
+
+    if (shake > 100) {
+      switchOn();
+      b.rainbow(10);
+      delay(100);
+      b.allLedsOff();
+    }
+
+    xValue = b.readX();
+    yValue = b.readY();
+    zValue = b.readZ();
+    delay(50);  // a little delay to help measure movement
 }
+
+
+
+
 
